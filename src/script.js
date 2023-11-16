@@ -15,8 +15,7 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-const axesHelper = new THREE.AxesHelper()
-scene.add(axesHelper)
+
 
 
 const flaqueMat = new THREE.ShaderMaterial({
