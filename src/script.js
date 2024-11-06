@@ -15,6 +15,11 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+// Sizes
+const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight
+}
 
 
 
@@ -40,7 +45,6 @@ const flaqueMat = new THREE.ShaderMaterial({
 const textureLoader = new THREE.TextureLoader()
 const cardTexture = textureLoader.load('/textures/espace.jpg')
 const cardGeo = new THREE.PlaneGeometry(0.75,1.5,512,1024)
-console.log(cardGeo.parameters);
 const cardMat = new THREE.ShaderMaterial({
     vertexShader : cardVertexShader,
     fragmentShader : cardFragmentShader,
@@ -57,8 +61,6 @@ const card2 = new THREE.Mesh(cardGeo, cardMat)
 const card3 = new THREE.Mesh(cardGeo, cardMat)
 const card5 = new THREE.Mesh(cardGeo, cardMat)
 
-
-
 card4.position.set(0.95,-2.75,0)
 card2.position.set(-0.95,-2.75,0)
 card3.position.set(1.9,-2.75,0)
@@ -68,10 +70,18 @@ card.position.y = -2.75
 
 scene.add(card,card2,card3, card4,card5)
 
-const textures = ["html","css","javascript","wordpress","blender","figma", "vite", "php"]
+
+// Camera
+const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height)
+camera.position.set(0,0,3)
+const truc = new THREE.Vector2()
+camera.getViewSize(3, truc)
+
+const textures = ["html","css","javascript","wordpress","blender","figma", "vite", "php", "vue", "postgres"]
 const logoGeoTest = new THREE.PlaneGeometry(0.1,0.1,256,256)
 const meshes = []
-let positionX = -1.58
+
+let positionX = - (truc.x/2) + truc.x *0.08 +0.05
 
 for(const texture of textures){
     const load = "/textures/"+texture+".webp"
@@ -98,16 +108,6 @@ for(const texture of textures){
 
 
 
-// Sizes
-const sizes = {
-    width: window.innerWidth,
-    height: window.innerHeight
-}
-
-// Camera
-const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height)
-camera.position.set(0,0,3)
-scene.add(camera)
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
@@ -179,6 +179,5 @@ window.addEventListener('scroll',e=>{
     card4.position.x = 0.95 + paf *15
     card5.position.x = -1.9 + paf *15
 
-    console.log(window.scrollY/window.innerHeight);
 
 })

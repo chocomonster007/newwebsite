@@ -35,6 +35,10 @@ body{
     font-weight: 500;
     
 }
+:root{
+    scroll-behavior: smooth;
+
+}
 h1,h2{
     font-weight: 500;
     text-transform: uppercase;
@@ -99,6 +103,9 @@ main p{
 .contact >*{
     margin-left:8vw
 }
+
+header{position: absolute;
+z-index: 10;}
 
 .contact p{
     margin-top: 5vh;
